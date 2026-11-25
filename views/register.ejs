@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<section class="narrow auth-panel">
+  <p class="eyebrow">NEW STUDENT ACCOUNT</p>
+  <h1>Register</h1>
+  <p class="muted">Create a student account to read and share tips.</p>
+  <% if (error) { %><p class="alert" role="alert"><%= error %></p><% } %>
+  <form action="/register" method="post" class="form-stack">
+    <label>Username <input name="username" value="<%= values.username || '' %>" minlength="3" maxlength="24" pattern="[a-zA-Z0-9_-]+" autocomplete="username" required autofocus placeholder="e.g. student_alex"></label>
+    <label>Display name <input name="displayName" value="<%= values.displayName || '' %>" minlength="2" maxlength="40" required placeholder="e.g. Alex Chan"></label>
+    <label>Password <input name="password" type="password" minlength="6" maxlength="64" autocomplete="new-password" required></label>
+    <button class="button" type="submit">Create account</button>
+  </form>
+  <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<section class="hero">
+  <p class="eyebrow">ARRIVING IN HONG KONG</p>
+  <h1>New to Hong Kong?<br><em>Start here.</em></h1>
+  <p class="hero-copy">Find posts about transport, housing, and getting used to campus life.</p>
+  <a class="button" href="<%= currentUser ? '/posts' : '/login' %>">Read posts <span aria-hidden="true">↗</span></a>
+</section>
+<section class="intro-grid" aria-label="Guide topics">
+  <article><span class="num">01</span><h2>Get ready</h2><p>Find out what to do before you arrive and in your first week.</p></article>
+  <article><span class="num">02</span><h2>Find a topic</h2><p>Read posts about transport, housing, campus, and daily life.</p></article>
+  <article><span class="num">03</span><h2>Add your own post</h2><p>Share a tip, a warning, or a question.</p></article>
+</section>
+<%- include('partials/footer') %>

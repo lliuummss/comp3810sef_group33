@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+<section class="page-heading">
+  <div><p class="eyebrow">TIPS AND QUESTIONS</p><h1>Student posts</h1><p>Read what other students have posted about life in Hong Kong.</p></div>
+  <a class="button" href="/posts/new">+ New post</a>
+</section>
+<form class="filters" action="/posts" method="get" aria-label="Search posts">
+  <label>Keyword <input name="q" value="<%= filters.q || '' %>" maxlength="80" placeholder="Search title or content"></label>
+  <label>Stage <select name="stage"><option value="">All stages</option><% for (const value of Object.keys(stages)) { %><option value="<%= value %>" <%= filters.stage === value ? 'selected' : '' %>><%= stages[value] %></option><% } %></select></label>
+  <label>Category <select name="category"><option value="">All categories</option><% for (const value of Object.keys(categories)) { %><option value="<%= value %>" <%= filters.category === value ? 'selected' : '' %>><%= categories[value] %></option><% } %></select></label>
+  <label>Type <select name="type"><option value="">All types</option><% for (const value of Object.keys(types)) { %><option value="<%= value %>" <%= filters.type === value ? 'selected' : '' %>><%= types[value] %></option><% } %></select></label>
+  <button class="button" type="submit">Search</button>
+  <a class="clear-link" href="/posts">Clear</a>
+</form>
+<p class="result-count"><strong><%= posts.length %></strong> posts found</p>
+<div class="post-grid">
+  <% for (const post of posts) { %>
+    <article class="post-card">
+      <div class="card-meta"><span><%= stages[post.stage] || post.stage %></span><span><%= categories[post.category] || post.category %></span><span><%= types[post.type] || post.type %></span><% if (post.photo) { %><span class="photo-badge">Photo</span><% } %></div>
+      <h2><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
+      <p><%= post.body.length > 115 ? post.body.slice(0, 115) + '…' : post.body %></p>
+      <div class="card-foot"><span><%= post.authorName %></span><time><%= new Date(post.createdAt).toLocaleDateString('en-HK') %></time></div>
+    </article>
+  <% } %>
+  <% if (!posts.length) { %><div class="empty-state"><h2>No posts to show</h2><p>Try another search or add a post.</p></div><% } %>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<article class="article narrow">
+  <a class="back-link" href="/posts">← Back to posts</a>
+  <div class="card-meta"><span><%= stages[post.stage] || post.stage %></span><span><%= categories[post.category] || post.category %></span><span><%= types[post.type] || post.type %></span></div>
+  <h1><%= post.title %></h1>
+  <p class="byline">By <%= post.authorName %> · <%= new Date(post.createdAt).toLocaleDateString('en-HK') %></p>
+  <% if (post.photo) { %>
+    <figure class="article-photo">
+      <img src="data:<%= post.photoType || 'image/jpeg' %>;base64,<%= post.photo %>" alt="<%= post.title %>">
+    </figure>
+  <% } %>
+  <div class="article-body"><%= post.body %></div>
+  <% if (currentUser.username === post.authorId) { %>
+    <div class="article-actions">
+      <a class="button" href="/posts/<%= post._id %>/edit">Edit post</a>
+      <form action="/posts/<%= post._id %>/delete" method="post" class="inline-form"><button class="danger-button" type="submit" onclick="return confirm('Delete this post?')">Delete post</button></form>
+    </div>
+  <% } %>
+</article>
+<%- include('partials/footer') %>

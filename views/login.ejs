@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<section class="narrow auth-panel">
+  <p class="eyebrow">STUDENT LOGIN</p>
+  <h1>Log in</h1>
+  <p class="muted">Use a demo account to read and write posts.</p>
+  <% if (error) { %><p class="alert" role="alert"><%= error %></p><% } %>
+  <form action="/login" method="post" class="form-stack">
+    <label>Username <input name="username" autocomplete="username" required autofocus></label>
+    <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="button" type="submit">Log in</button>
+  </form>
+  <p class="auth-switch">New here? <a href="/register">Create a student account</a></p>
+</section>
+<%- include('partials/footer') %>

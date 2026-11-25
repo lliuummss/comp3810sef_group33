@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<section class="narrow">
+  <a class="back-link" href="/posts">← Back to posts</a>
+  <p class="eyebrow"><%= post._id ? 'EDIT POST' : 'NEW POST' %></p>
+  <h1><%= title %></h1>
+  <p class="muted">Share a tip or ask a question. If you mention rules or prices, add a link to an official source.</p>
+  <form action="<%= action %>" method="post" enctype="multipart/form-data" class="form-stack post-form">
+    <label>Title <input name="title" value="<%= post.title || '' %>" minlength="3" maxlength="100" required placeholder="What I did in my first week"></label>
+    <div class="form-row">
+      <label>Stage <select name="stage" required><option value="">Choose a stage</option><% for (const value of Object.keys(stages)) { %><option value="<%= value %>" <%= post.stage === value ? 'selected' : '' %>><%= stages[value] %></option><% } %></select></label>
+      <label>Category <select name="category" required><option value="">Choose a category</option><% for (const value of Object.keys(categories)) { %><option value="<%= value %>" <%= post.category === value ? 'selected' : '' %>><%= categories[value] %></option><% } %></select></label>
+    </div>
+    <label>Type <select name="type" required><option value="">Choose a type</option><% for (const value of Object.keys(types)) { %><option value="<%= value %>" <%= post.type === value ? 'selected' : '' %>><%= types[value] %></option><% } %></select></label>
+    <label>Content <textarea name="body" minlength="10" maxlength="5000" rows="12" required placeholder="Write your tip or question here."><%= post.body || '' %></textarea></label>
+    <label>Photo (optional, JPG/PNG/WebP/GIF up to 2 MB) <input name="photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif"></label>
+    <% if (post.photo) { %>
+      <div class="photo-preview">
+        <img src="data:<%= post.photoType || 'image/jpeg' %>;base64,<%= post.photo %>" alt="Current post photo">
+        <label class="checkbox-inline"><input type="checkbox" name="removePhoto" value="1"> Remove current photo</label>
+      </div>
+    <% } %>
+    <button class="button" type="submit"><%= submitLabel %></button>
+  </form>
+</section>
+<%- include('partials/footer') %>
